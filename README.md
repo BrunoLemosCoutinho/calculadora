@@ -31,4 +31,6 @@ Obs2: uma limitação inicial será a falta de tratamento de números com notaç
 ---
 
 Esboço geral de implementação
-![Image description](link-to-image)
+
+
+![Esboço](Esboco.png)
