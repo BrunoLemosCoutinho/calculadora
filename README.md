@@ -1,4 +1,4 @@
-**# Calculadora em Python**
+**Calculadora em Python**
 ---
 
 Projeto de treino em Python para criar uma calculadora simples utilizando o Tkinter.
@@ -34,3 +34,17 @@ Esboço geral de implementação
 
 
 ![Esboço](Esboco.png)
+
+
+
+---
+
+**Diário de Bordo**
+---
+
+Dia 1 - 07/02/2018
+
+O que foi feito:
+*  Criação do arquivo Readme
+*  Esboço da aplicação
+*  Criação do repositório e ligação com máquina local
