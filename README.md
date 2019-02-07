@@ -1,4 +1,5 @@
 **# Calculadora em Python**
+---
 
 Projeto de treino em Python para criar uma calculadora simples utilizando o Tkinter.
 
@@ -6,6 +7,7 @@ Aplicação prática de conceitos de Orientação a Objetos e GUI (Tkinter)
 
 
 **O que é o Projeto**
+---
 
 O projeto consiste em implementar uma calculadora que efetue cálculos simples.
 
@@ -26,5 +28,7 @@ Obs2: uma limitação inicial será a falta de tratamento de números com notaç
 
 
 **Esboço**
+---
 
 Esboço geral de implementação
+![Image description](link-to-image)
