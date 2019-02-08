@@ -48,3 +48,9 @@ O que foi feito:
 *  Criação do arquivo Readme
 *  Esboço da aplicação
 *  Criação do repositório e ligação com máquina local
+*  Codificação preliminar do layout
+*  
+
+Dificuldades:
+*  Utilizar os gerenciadores de geometria
+    Dificuldade na escolha da melhor opção (grid , pack ou place) para os frames dentro da janela Tk() e widgets dentro de cada frame.
