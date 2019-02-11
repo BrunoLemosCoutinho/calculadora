@@ -54,3 +54,15 @@ O que foi feito:
 Dificuldades:
 *  Utilizar os gerenciadores de geometria
     Dificuldade na escolha da melhor opção (grid , pack ou place) para os frames dentro da janela Tk() e widgets dentro de cada frame.
+
+
+Dia 2 - 11/02/2018
+
+O que foi feito:
+*   Decisão do uso do gerenciador de geometria
+    Uso do grid como gerenciador de geometria, por ser o mais confiável de utilizar
+
+Dificuldades:
+*  Utilizar os gerenciadores de geometria
+    Dificuldade de como utilizar os comandos e como não quebrar o layout
+
