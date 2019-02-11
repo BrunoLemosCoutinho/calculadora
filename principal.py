@@ -6,10 +6,16 @@ from Frame_Botoes import BotoesAlgarismos
 
 
 root = tk.Tk()
-root.geometry("800x640")
+#root.geometry("640x640")
 visor = Display(root)
 numeros = BotoesAlgarismos(root)
 
-visor.place( x = 15 , y = 25)
-numeros.place( x = 15 , y = 150)
+
+
+
+visor.grid(row = 1 , column = 1 , columnspan = 2 , ipadx = 100)
+numeros.grid(row = 2 , column = 1 , sticky = tk.W + tk.E)
+
+
+
 root.mainloop()

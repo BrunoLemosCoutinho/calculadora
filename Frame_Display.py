@@ -17,8 +17,8 @@ class Display(Frame):
 		self.label_display["relief"] = "groove"
 		self.label_display["bd"] = 5
 		self.label_display["height"] = 5
-		self.label_display["width"] = 95
-		self.label_display.pack()
+		#self.label_display["width"] = 25
+		self.label_display.pack(fill = tk.BOTH)
 
 
 
