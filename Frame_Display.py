@@ -1,24 +1,38 @@
 import tkinter as tk
 from tkinter import Frame
 
-class Display(Frame):
+class DisplayContainer(Frame):
 
-	def __init__(self , root):
-		Frame.__init__(self , root)
-		self.criarWidgets()
+	def __init__(self, root):
+		Frame.__init__(self, root)
+		self.parent = root
+
+		self.configure(bg="cyan", height=5)
+		
+		# Layout DisplayContainer
+		self.grid(row=0 , column=0 , sticky="nwe")
+		self.parent.columnconfigure(0, weight=1)
+
+		# Call DisplayContainer widgets creation
+		self.createWidgets()
 
 
 
-	def criarWidgets(self):
+	# Create widgets for DisplayContainer
+	def createWidgets(self):
 
 		self.label_display = tk.Label(self)
-		self.label_display["text"] = "0000"
+		self.label_display["text"] = "0"
+		self.label_display["font"] = 15
 		self.label_display["bg"] = "#bebebe"
 		self.label_display["relief"] = "groove"
 		self.label_display["bd"] = 5
 		self.label_display["height"] = 5
-		#self.label_display["width"] = 25
-		self.label_display.pack(fill = tk.BOTH)
+
+
+	# Layout widgets for DisplayContainer
+		self.label_display.grid(row=0 , column=0 , sticky="nswe")
+		self.columnconfigure(0, weight=1)
 
 
 
