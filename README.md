@@ -42,27 +42,38 @@ Esboço geral de implementação
 **Diário de Bordo**
 ---
 
-Dia 1 - 07/02/2018
+**Dia 1 - 07/02/2018**
 
-O que foi feito:
-*  Criação do arquivo Readme
-*  Esboço da aplicação
-*  Criação do repositório e ligação com máquina local
-*  Codificação preliminar do layout
-*  
+*O que foi feito:*
+*  Criação do arquivo Readme.
+*  Esboço da aplicação.
+*  Criação do repositório e ligação com máquina local.
+*  Codificação preliminar do layout.
 
-Dificuldades:
-*  Utilizar os gerenciadores de geometria
+*Dificuldades*:
+*  Utilizar os gerenciadores de geometria.
     Dificuldade na escolha da melhor opção (grid , pack ou place) para os frames dentro da janela Tk() e widgets dentro de cada frame.
 
 
-Dia 2 - 11/02/2018
+**Dia 2 - 11/02/2018**
 
-O que foi feito:
-*   Decisão do uso do gerenciador de geometria
-    Uso do grid como gerenciador de geometria, por ser o mais confiável de utilizar
+*O que foi feito:*
+*   Decisão do uso do gerenciador de geometria.
+    Uso do grid como gerenciador de geometria, por ser o mais confiável de utilizar.
 
-Dificuldades:
-*  Utilizar os gerenciadores de geometria
-    Dificuldade de como utilizar os comandos e como não quebrar o layout
+*Dificuldades*:
+*  Utilizar os gerenciadores de geometria.
+    Dificuldade de como utilizar os comandos e como não quebrar o layout.
 
+
+**Dia 3 - 20/02/2018**
+
+*O que foi feito:*
+*  Estudos sobre o gerenciador de geometria grid.
+*  Rascunho do novo layout.
+[Novo layout](novo_layout.png).
+*  Implementação do layout.
+*  Limpeza e organização do código.
+
+*Dificuldades:*
+*  Organizar a estrutura de nomes de classes e arquivos.
