@@ -13,7 +13,7 @@ def pressNumber(num):
 	agregator = agregator + str(num)
 	result = agregator
 
-	principal.visor.updateTextDisplay(result)
+	window.visor.updateTextDisplay(result)
 
 
 def pressEqual():
