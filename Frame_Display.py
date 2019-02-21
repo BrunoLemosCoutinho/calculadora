@@ -1,7 +1,6 @@
 import tkinter as tk
 from tkinter import Frame
 from tkinter import StringVar
-import Calculadora
 
 class DisplayContainer(Frame):
 
@@ -12,8 +11,6 @@ class DisplayContainer(Frame):
 		self.configure(bg="cyan", height=5)
 
 		self.text_display = StringVar()
-		self.text_display = Calculadora.result
-		
 		
 		# Layout DisplayContainer
 		self.grid(row=0 , column=0 , sticky="nwe")
@@ -42,8 +39,6 @@ class DisplayContainer(Frame):
 
 
 
-	# Method to update the value for text_display
-	@staticmethod
-	def updateTextDisplay(result):
+	def updateTextDisplay(self, result):
 
 		self.text_display.set(result)

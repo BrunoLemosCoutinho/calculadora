@@ -1,30 +1,29 @@
-
-class Calculadora:
-
-	agregator = ""
-	result = "bbmp"
-
-	# Function to update agregator variable
-	# and display text
-
-	@classmethod
-	def pressNumber(cls, num):
-
-		Calculadora.agregator = Calculadora.agregator + str(num)
-		Calculadora.result = Calculadora.agregator
+import principal
 
 
-		print(num)
+agregator = ""
+result = "bbmp"
 
-	@classmethod
-	def pressEqual(cls):
 
-		try:
-			total = str(eval(Calculadora.agregator))
-			Calculadora.result = total
+def pressNumber(num):
 
-		except:
-			pass
+	global agregator
+	global result
+
+	agregator = agregator + str(num)
+	result = agregator
+
+	principal.visor.updateTextDisplay(result)
+
+
+def pressEqual():
+
+	try:
+		total = str(eval(agregator))
+		result = total
+
+	except:
+		pass
 
 
 

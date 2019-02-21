@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import Frame
-from Calculadora import Calculadora
+import calculadora
 
 
 class ButtonsContainer(Frame):
@@ -28,21 +28,21 @@ class ButtonsContainer(Frame):
 		button_padx = 15
 		button_pady = 15		
 
-		self.button_1 = tk.Button(self, text="1", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber(1))
-		self.button_2 = tk.Button(self, text="2", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber(2))
-		self.button_3 = tk.Button(self, text="3", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber(3))
-		self.button_4 = tk.Button(self, text="4", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber(4))
-		self.button_5 = tk.Button(self, text ="5", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber(5))
-		self.button_6 = tk.Button(self, text ="6", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber(6))
-		self.button_7 = tk.Button(self, text="7", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber(7))
-		self.button_8 = tk.Button(self, text="8", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber(8))
-		self.button_9 = tk.Button(self, text="9", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber(9))
-		self.button_0 = tk.Button(self, text="0", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber(0))
-		self.button_dot = tk.Button(self, text=".", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber("."))
-		self.button_plus = tk.Button(self, text="+", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber("+"))
-		self.button_minus = tk.Button(self, text="-", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber("-"))
-		self.button_multiply = tk.Button(self, text="*", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber("*"))
-		self.button_divide = tk.Button(self, text="/", padx = button_padx, pady = button_pady, command = lambda : Calculadora.pressNumber("/"))
+		self.button_1 = tk.Button(self, text="1", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(1))
+		self.button_2 = tk.Button(self, text="2", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(2))
+		self.button_3 = tk.Button(self, text="3", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(3))
+		self.button_4 = tk.Button(self, text="4", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(4))
+		self.button_5 = tk.Button(self, text ="5", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(5))
+		self.button_6 = tk.Button(self, text ="6", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(6))
+		self.button_7 = tk.Button(self, text="7", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(7))
+		self.button_8 = tk.Button(self, text="8", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(8))
+		self.button_9 = tk.Button(self, text="9", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(9))
+		self.button_0 = tk.Button(self, text="0", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(0))
+		self.button_dot = tk.Button(self, text=".", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber("."))
+		self.button_plus = tk.Button(self, text="+", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber("+"))
+		self.button_minus = tk.Button(self, text="-", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber("-"))
+		self.button_multiply = tk.Button(self, text="*", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber("*"))
+		self.button_divide = tk.Button(self, text="/", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber("/"))
 		self.button_equal = tk.Button(self, text="=", padx = button_padx, pady = button_pady)
 		self.button_clear = tk.Button(self, text="CLEAR", padx = button_padx, pady = button_pady)
 
