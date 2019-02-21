@@ -46,7 +46,7 @@ class ButtonsContainer(Frame):
 		self.button_minus = tk.Button(self, text="-", padx=button_padx, pady=button_pady, command=lambda: calculadora.pressNumber("-"))
 		self.button_multiply = tk.Button(self, text="*", padx=button_padx, pady=button_pady, command=lambda: calculadora.pressNumber("*"))
 		self.button_divide = tk.Button(self, text="/", padx=button_padx, pady=button_pady, command=lambda: calculadora.pressNumber("/"))
-		self.button_equal = tk.Button(self, text="=", padx=button_padx, pady=button_pady)
+		self.button_equal = tk.Button(self, text="=", padx=button_padx, pady=button_pady, command=calculadora.pressEqual)
 		self.button_clear = tk.Button(self, text="CLEAR", padx=button_padx, pady=button_pady)
 
 	# Layout widgets for ButtonsContainer
@@ -78,3 +78,6 @@ class ButtonsContainer(Frame):
 
 		for i in range(0, 4):
 			self.columnconfigure(i, weight=1)
+
+
+

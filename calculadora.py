@@ -1,4 +1,4 @@
-import window
+
 
 
 agregator = ""
@@ -19,11 +19,18 @@ def pressNumber(num):
 def pressEqual():
 
 	try:
+		global agregator
+
 		total = str(eval(agregator))
-		result = total
+
+		window.visor.updateTextDisplay(total)
+		agregator = ""
 
 	except:
-		pass
+		
+		window.visor.updateTextDisplay("Error")
+		agregator = ""
 
 
 
+import window
