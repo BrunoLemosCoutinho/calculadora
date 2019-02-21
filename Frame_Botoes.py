@@ -38,6 +38,11 @@ class ButtonsContainer(Frame):
 		self.button_8 = tk.Button(self, text="8", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(8))
 		self.button_9 = tk.Button(self, text="9", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(9))
 		self.button_0 = tk.Button(self, text="0", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber(0))
+
+		self.button_open_parens = tk.Button(self, text="(", padx=button_padx, pady=button_pady, command=lambda: calculadora.pressNumber("("))
+		self.button_close_parens = tk.Button(self, text=")", padx=button_padx, pady=button_pady, command=lambda: calculadora.pressNumber(")"))
+
+
 		self.button_dot = tk.Button(self, text=".", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber("."))
 		self.button_plus = tk.Button(self, text="+", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber("+"))
 		self.button_minus = tk.Button(self, text="-", padx = button_padx, pady = button_pady, command = lambda : calculadora.pressNumber("-"))
@@ -56,15 +61,21 @@ class ButtonsContainer(Frame):
 		self.button_7.grid(row=2, column=0, sticky="nswe")
 		self.button_8.grid(row=2, column=1, sticky="nswe")
 		self.button_9.grid(row=2, column=2, sticky="nswe")
-		self.button_0.grid(row=3, columnspan=2, sticky="nswe")
-		self.button_dot.grid(row=3, column=2, sticky="nswe")
+
+		self.button_open_parens.grid(row=3, column=0, sticky="nswe")
+		self.button_close_parens.grid(row=3, column=2, sticky="nswe")
+
+
+
+		self.button_0.grid(row=3, column=1, sticky="nswe")
+		self.button_dot.grid(row=4, column=2, sticky="nswe")
 		self.button_plus.grid(row=0 , column=3, sticky="nswe")
 		self.button_minus.grid(row=1 , column=3, sticky="nswe")
 		self.button_multiply.grid(row=2 , column=3, sticky="nswe")
 		self.button_divide.grid(row=3 , column=3, sticky="nswe")
 
 		self.button_equal.grid(row=4 , column=3, sticky="nswe")
-		self.button_clear.grid(row=4 , columnspan=3, sticky="nswe")
+		self.button_clear.grid(row=4 , columnspan=2, sticky="nswe")
 
 		for x in range(0,5):
 			self.rowconfigure(x, weight=1)

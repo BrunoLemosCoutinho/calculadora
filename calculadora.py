@@ -1,4 +1,4 @@
-import principal
+import window
 
 
 agregator = ""
