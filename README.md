@@ -52,18 +52,18 @@ Esboço geral de implementação
 
 *Dificuldades*:
 *  Utilizar os gerenciadores de geometria.
-    Dificuldade na escolha da melhor opção (grid , pack ou place) para os frames dentro da janela Tk() e widgets dentro de cada frame.
+*  Dificuldade na escolha da melhor opção (grid , pack ou place) para os frames dentro da janela Tk() e widgets dentro de cada frame.
 
 
 **Dia 2 - 11/02/2018**
 
 *O que foi feito:*
 *   Decisão do uso do gerenciador de geometria.
-    Uso do grid como gerenciador de geometria, por ser o mais confiável de utilizar.
+*   Uso do GRID como gerenciador de geometria, por ser o mais confiável de utilizar.
 
 *Dificuldades*:
-*  Utilizar os gerenciadores de geometria.
-    Dificuldade de como utilizar os comandos e como não quebrar o layout.
+*  Utilizar o gerenciador de geometria GRID.
+*  Dificuldade em como utilizar os comandos e como não quebrar o layout.
 
 
 **Dia 3 - 20/02/2018**
@@ -77,3 +77,13 @@ Esboço geral de implementação
 
 *Dificuldades:*
 *  Organizar a estrutura de nomes de classes e arquivos.
+
+
+**Dia 4 - 21/02/2018**
+
+*O que foi feito:*
+* Implementação da lógica dos cálculos
+* Reestruturação da aplicação
+
+*Dificuldades:*
+* Conflitos no código causados pelo uso de importação de módulos
