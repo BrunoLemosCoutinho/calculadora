@@ -1,6 +1,4 @@
 
-
-
 agregator = ""
 result = "bbmp"
 
@@ -26,10 +24,22 @@ def pressEqual():
 		window.visor.updateTextDisplay(total)
 		agregator = ""
 
+	except ZeroDivisionError:
+
+		window.visor.updateTextDisplay("Erro: Divisão por zero")
+		agregator = ""
+
 	except:
 		
 		window.visor.updateTextDisplay("Error")
 		agregator = ""
+
+
+def pressClear():
+
+	global agregator
+	agregator = ""
+	window.visor.updateTextDisplay("Clear")
 
 
 

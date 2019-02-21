@@ -39,6 +39,6 @@ class DisplayContainer(Frame):
 
 
 
-	def updateTextDisplay(self, result):
+	def updateTextDisplay(self, text):
 
-		self.text_display.set(result)
+		self.text_display.set(text)
