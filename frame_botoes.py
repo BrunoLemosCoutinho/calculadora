@@ -31,7 +31,7 @@ class ButtonsContainer(Frame):
 		self.parent.bind(".", self.keysHandler)
 		self.parent.bind(",", self.keysHandler)
 		self.parent.bind("<Return>", self.returnKeyHandler)
-
+		self.parent.bind("<BackSpace>", self.bsHandler)
 
 
 
@@ -104,6 +104,12 @@ class ButtonsContainer(Frame):
 	# Handler: Return key
 	def returnKeyHandler(self, event):
 		calculadora.pressEqual()
+
+	# Handler: BackSpace key
+	def bsHandler(self,event):
+		calculadora.pressBS()
+		
+
 
 
 

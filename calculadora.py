@@ -42,5 +42,14 @@ def pressClear():
 	window.visor.updateTextDisplay("Clear")
 
 
+def pressBS():
+	global agregator
+	global result
+
+	agregator = agregator[:-1]
+	result = agregator
+
+	window.visor.updateTextDisplay(result)
+	
 
 import window
