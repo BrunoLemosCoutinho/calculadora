@@ -87,3 +87,12 @@ Esboço geral de implementação
 
 *Dificuldades:*
 * Conflitos no código causados pelo uso de importação de módulos
+
+
+**Dia 5 - 06/03/2018**
+
+*O que foi feito:*
+* Implementação da funcionalidade que aceita inputs do teclado
+
+*Dificuldades:*
+* 
