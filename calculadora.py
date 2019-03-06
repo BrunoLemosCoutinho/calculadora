@@ -26,7 +26,7 @@ def pressEqual():
 
 	except ZeroDivisionError:
 
-		window.visor.updateTextDisplay("Erro: Divisão por zero")
+		window.visor.updateTextDisplay("Erro: Divisão por zero (Division by zero)")
 		agregator = ""
 
 	except:
