@@ -9,6 +9,8 @@ class ButtonsContainer(Frame):
 		Frame.__init__(self, root)
 		self.parent = root
 		self.configure(bg="yellow")
+		self.parent.bind("<Key>", self.keyHandler)
+		self.parent.bind("<Return>", self.returnKeyHandler)
 
 
 		# Layout ButtonsContainer
@@ -78,6 +80,15 @@ class ButtonsContainer(Frame):
 
 		for i in range(0, 4):
 			self.columnconfigure(i, weight=1)
+
+	#Bind keyboard events
+	def keyHandler(self, event):
+		calculadora.pressNumber(event.char)
+
+	#Bind Return key
+	def returnKeyHandler(self, event):
+		calculadora.pressEqual()
+
 
 
 
