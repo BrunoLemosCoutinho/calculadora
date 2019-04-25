@@ -1,6 +1,6 @@
 
 agregator = ""
-result = "bbmp"
+result = ""
 
 
 def pressNumber(num):
