@@ -11,13 +11,28 @@ class Calculator(tkinter.Frame):
 
 		self.text = tkinter.StringVar()
 		self.text.set(0)
-		self.aggregator = ''
-		self.result = [0.0]
+		self.aggregator = ['0']
+		self.values = [0.0]
 		self.operator_counter = 0
+		self.operator = None
+		self.total = 0
+		self.error = None
 
 		self.place_frames()
 		self.bind("<Key>", self.key_handler)
 		self.focus_set()
+
+		self.debugger()		# DEBUGGER
+
+
+
+	def debugger(self):
+		print(f'Status atual de AGGREGATOR: {self.aggregator}')
+		print(f'OPERADOR atual: {self.operator}')
+		print(f'Contador de Operator:{self.operator_counter}')
+		print(f'Status atual de VALUES: {self.values}')
+		print(f'O valor de TOTAL: {self.total}')
+		print('---------------------------------------')
 
 	def place_frames(self):
 		display_frame = DisplayContainer(self
@@ -25,45 +40,110 @@ class Calculator(tkinter.Frame):
 		buttons_frame = ButtonsContainer(self
 			).grid(row=1, column=0, sticky='nsew')
 
-	def put_char(self, event):
-		self.aggregator += event.char
-		self.text.set(self.aggregator)
+	def put_char_on_display(self, event):
+		if self.aggregator[0] == '0':
+			self.aggregator.pop(0)
+			self.aggregator.append(event.char)
+			self.text.set(self.aggregator)
+		else:
+			self.aggregator.append(event.char)
+			self.text.set(self.aggregator)
+
+	def get_values_from_aggregator(self):
+		values = ''.join(self.aggregator)
+		return float(values)
+
+	def conclude_operation(self, result):
+
+		self.total = result
+		self.text.set(f'{result}')
+		self.aggregator = ['0']
+		self.operator = None
+		self.operator_counter = 0
+		self.values = [result]
+
+		if self.error is ZeroDivisionError:
+			self.text.set('Error: Division By Zero')
+
+
+		self.debugger()
+
+
+	def resolve_sum(self):
+		last_aggregator_value = self.get_values_from_aggregator()
+		self.values.append(last_aggregator_value)
+		return sum(self.values)
+
+	def resolve_subtraction(self):
+		last_aggregator_value = self.get_values_from_aggregator()
+		self.values.append(last_aggregator_value)
+		# Removing zeros from values list
+		new_values_list = [value for value in self.values if value > 0]
+		a, b = new_values_list
+		return a - b
+
+	def resolve_multiplication(self):
+		last_aggregator_value = self.get_values_from_aggregator()
+		self.values.append(last_aggregator_value)
+		# Removing zeros from values list
+		new_values_list = [value for value in self.values if value > 0]
+		a, b = new_values_list
+		return a * b
+
+	def resolve_division(self):
+		# Removing zeros from values list
+		new_values_list = [value for value in self.values if value > 0]
+		last_aggregator_value = self.get_values_from_aggregator()
+		new_values_list.append(last_aggregator_value)
+		a, b = new_values_list
+
+		try:
+			a / b
+		except ZeroDivisionError as error:
+			self.error = error
+			print(self.error)
+			return 0
+		else:
+			return a / b
+	
+
+
 
 	def resolve(self):
-		if self.result[1] == '+':
-			self.result.pop(1)
-			final_result = sum(self.result)
-			self.result = final_result
-			self.text.set(str(final_result))
-			self.operator_counter = 0
-		elif self.result[1] == '-':
-			pass
+		if self.operator == '+':
+			result = self.resolve_sum()
+			self.conclude_operation(result)
+		elif self.operator == '-':
+			result = self.resolve_subtraction()
+			self.conclude_operation(result)
+		elif self.operator == '*':
+			result = self.resolve_multiplication()
+			self.conclude_operation(result)
+		elif self.operator == '/':
+			result = self.resolve_division()
+			self.conclude_operation(result)
 
 
 	def key_handler(self, event):
 		if event.char.isdigit():
-			self.put_char(event)
-			print(f'Tecla pressionada: {event.char}')
-			print(f'Status atual de AGGREGATOR: {self.aggregator}')
-			print(f'Status atual de RESULT: {self.result}')
-			print('---------------------------------------')
+			self.put_char_on_display(event)
+			self.debugger()
 
 		if event.char in self.operators:
 			self.operators_handler(event)
 
 	def operators_handler(self, event):
 		if self.operator_counter == 0:
-			if isinstance(self.result[-1], float):
-				self.result.append(event.char)
-				self.result.append(float(self.aggregator))
-				self.aggregator = ''
-				self.operator_counter = 1
-				print(f'Tecla pressionada: {event.char}')
-				print(f'Status atual de AGGREGATOR: {self.aggregator}')
-				print(f'Status atual de RESULT: {self.result}')
+			self.operator = event.char
+			self.values.append(self.get_values_from_aggregator())
+			self.aggregator = ['0']
+			self.operator_counter = 1
+			self.debugger()
+			# make button change color to indicate
+			# it is active and is the option
 		else:
-			pass
-			# resolve result
+			self.resolve()
+			# resolve values
 
 
 class DisplayContainer(tkinter.Frame):
