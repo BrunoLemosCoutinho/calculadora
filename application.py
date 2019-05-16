@@ -2,7 +2,7 @@ import tkinter
 
 
 class Calculator(tkinter.Frame):
-	operators = ['+', '-', '*', '/']
+	operators = ['+', '-', '*', '/', '=']
 	def __init__(self, parent):
 		super().__init__(parent)
 		self.rowconfigure(0, weight=1)
@@ -40,6 +40,15 @@ class Calculator(tkinter.Frame):
 		buttons_frame = ButtonsContainer(self
 			).grid(row=1, column=0, sticky='nsew')
 
+	def set_to_default(self):
+		self.aggregator = ['0']
+		self.values = [0.0]
+		self.operator = None
+		self.operator_counter = 0
+		self.total = 0
+		self.error = None
+
+
 	def put_char_on_display(self, event):
 		if self.aggregator[0] == '0':
 			self.aggregator.pop(0)
@@ -62,9 +71,9 @@ class Calculator(tkinter.Frame):
 		self.operator_counter = 0
 		self.values = [result]
 
-		if self.error is ZeroDivisionError:
-			self.text.set('Error: Division By Zero')
-
+		if isinstance(self.error, ZeroDivisionError):
+			self.text.set(self.error.args)
+			self.set_to_default()
 
 		self.debugger()
 
@@ -101,8 +110,6 @@ class Calculator(tkinter.Frame):
 			a / b
 		except ZeroDivisionError as error:
 			self.error = error
-			print(self.error)
-			return 0
 		else:
 			return a / b
 	
@@ -144,6 +151,9 @@ class Calculator(tkinter.Frame):
 		else:
 			self.resolve()
 			# resolve values
+
+		if event.char == '=':
+			self.resolve()
 
 
 class DisplayContainer(tkinter.Frame):
