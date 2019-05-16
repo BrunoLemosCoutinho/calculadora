@@ -5,6 +5,7 @@ import application
 class TkinterWindow(tkinter.Tk):
 	def __init__(self):
 		super().__init__()
+		self.geometry('640x480')
 
 
 def main():
