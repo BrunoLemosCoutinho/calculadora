@@ -11,7 +11,7 @@ class Calculator(tkinter.Frame):
 
 		self.text = tkinter.StringVar()
 		self.text.set(0)
-		self.aggregator = ['0']
+		self.aggregator = []
 		self.operator = None
 		self.total = 0
 		self.error = None
@@ -20,7 +20,7 @@ class Calculator(tkinter.Frame):
 		self.second_number = 0
 		self.first_number_status = False
 		self.second_number_status = False
-		self.new_input = True
+		self.new_input_entry = True
 		self.aggregator_status = 'Inactive'
 
 		self.place_frames()
@@ -38,7 +38,7 @@ class Calculator(tkinter.Frame):
 	def debugger(self):
 		print(f'AGGREGATOR current content: {self.aggregator}')
 		print(f'AGGREGATOR current status: {self.aggregator_status}')
-		print(f'new_input: {self.new_input}')
+		print(f'new_input_entry: {self.new_input_entry}')
 		print(f'Current OPERATOR: {self.operator}')
 		print(f'first_number value: {self.first_number}')
 		print(f'second_number value: {self.second_number}')
@@ -50,7 +50,7 @@ class Calculator(tkinter.Frame):
 
 
 	def set_to_default(self):
-		self.aggregator = ['0']
+		self.aggregator = []
 		self.operator = None
 		self.total = 0
 		self.error = None
@@ -59,26 +59,24 @@ class Calculator(tkinter.Frame):
 		self.second_number = 0
 		self.first_number_status = False
 		self.second_number_status = False
-		self.new_input = True
+		self.new_input_entry = True
 		self.aggregator_status = 'Inactive'
 
 		self.debugger()
 
 	def put_char_on_display(self, event):
-		if self.new_input == True:
-			self.aggregator = ['0']
-			self.aggregator_status = 'Active'
-			self.new_input = False
-
-		if self.aggregator[0] == '0':
-			self.aggregator.pop(0)
+		if self.new_input_entry == True:
+			self.aggregator = []
 			self.aggregator.append(event.char)
 			self.text.set(self.aggregator)
 			self.aggregator_status = 'Active'
+			self.new_input_entry = False
+
 		else:
 			self.aggregator.append(event.char)
 			self.text.set(self.aggregator)
 			self.aggregator_status = 'Active'
+
 
 	def get_values_from_aggregator(self):
 		values = ''.join(self.aggregator)
@@ -90,7 +88,7 @@ class Calculator(tkinter.Frame):
 		self.text.set(f'{self.total}')
 		self.aggregator = [str(self.total)]
 		self.aggregator_status = 'Inactive'
-		self.new_input = True
+		self.new_input_entry = True
 		self.last_value = self.second_number
 		self.first_number = 0
 		self.second_number = 0
@@ -159,7 +157,7 @@ class Calculator(tkinter.Frame):
 			self.first_number = self.get_values_from_aggregator()
 			self.first_number_status = True
 			self.operator = event.char
-			self.new_input = True
+			self.new_input_entry = True
 			self.aggregator_status = 'Inactive'
 
 			self.debugger()
