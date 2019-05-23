@@ -32,7 +32,6 @@ class Calculator(tkinter.Frame):
 		buttons_frame = ButtonsContainer(self
 			).grid(row=1, column=0, sticky='nsew')
 
-
 	def debugger(self):
 		print(f'AGGREGATOR current content: {self.aggregator}')
 		print(f'AGGREGATOR current status: {self.aggregator_status}')
@@ -43,86 +42,6 @@ class Calculator(tkinter.Frame):
 		print(f'first_number_status: {self.first_number_status}')
 		print(f'TOTAL: {self.total}')
 		print('--------------------------------------------------')
-
-
-	def set_to_default(self):
-		self.aggregator = []
-		self.operator = None
-		self.total = 0
-		self.error = None
-		self.first_number = 0
-		self.second_number = 0
-		self.first_number_status = False
-		self.new_entry = True
-		self.aggregator_status = 'Inactive'
-
-		self.debugger()
-
-	def put_char_on_display(self, event):
-		if self.new_entry == True:
-			self.aggregator = []
-			self.aggregator.append(event.char)
-			self.text.set(self.aggregator)
-			self.aggregator_status = 'Active'
-			self.new_entry = False
-		else:
-			self.aggregator.append(event.char)
-			self.text.set(self.aggregator)
-			self.aggregator_status = 'Active'
-
-
-	def get_values_from_aggregator(self):
-		values = ''.join(self.aggregator)
-		return float(values)
-
-	def conclude_operation(self, result):
-
-		self.total = result
-		self.text.set(f'{self.total}')
-		self.aggregator = [str(self.total)]
-		self.aggregator_status = 'Inactive'
-		self.new_entry = True
-		self.first_number_status = False
-		self.last_value = self.second_number
-
-		if isinstance(self.error, ZeroDivisionError):
-			self.text.set(self.error.args)
-			self.set_to_default()
-
-		self.debugger()
-
-
-	def resolve_sum(self):
-		return self.first_number + self.second_number
-
-	def resolve_subtraction(self):
-		return self.first_number - self.second_number
-
-	def resolve_multiplication(self):
-		return self.first_number * self.second_number
-
-	def resolve_division(self):
-		try:
-			self.first_number / self.second_number
-		except ZeroDivisionError as error:
-			self.error = error
-		else:
-			return self.first_number / self.second_number
-
-	def resolve_handler(self):
-		if self.operator == '+':
-			result = self.resolve_sum()
-			self.conclude_operation(result)
-		elif self.operator == '-':
-			result = self.resolve_subtraction()
-			self.conclude_operation(result)
-		elif self.operator == '*':
-			result = self.resolve_multiplication()
-			self.conclude_operation(result)
-		elif self.operator == '/':
-			result = self.resolve_division()
-			self.conclude_operation(result)
-
 
 	def key_handler(self, event):
 		if event.char.isdigit():
@@ -140,6 +59,18 @@ class Calculator(tkinter.Frame):
 			else:
 				self.second_number = self.get_values_from_aggregator()
 				self.resolve_handler()
+
+	def put_char_on_display(self, event):
+		if self.new_entry == True:
+			self.aggregator = []
+			self.aggregator.append(event.char)
+			self.text.set(self.aggregator)
+			self.aggregator_status = 'Active'
+			self.new_entry = False
+		else:
+			self.aggregator.append(event.char)
+			self.text.set(self.aggregator)
+			self.aggregator_status = 'Active'
 
 	def operators_handler(self, event):
 		# Assingn the first_number
@@ -168,17 +99,70 @@ class Calculator(tkinter.Frame):
 		# If user press any operator after typing the second value
 		# the value on display will be assingned in second_number
 		# variable and resolve_handler() will be called.
-	
 
+	def get_values_from_aggregator(self):
+		values = ''.join(self.aggregator)
+		return float(values)
 
+	def resolve_handler(self):
+		if self.operator == '+':
+			result = self.resolve_sum()
+			self.conclude_operation(result)
+		elif self.operator == '-':
+			result = self.resolve_subtraction()
+			self.conclude_operation(result)
+		elif self.operator == '*':
+			result = self.resolve_multiplication()
+			self.conclude_operation(result)
+		elif self.operator == '/':
+			result = self.resolve_division()
+			self.conclude_operation(result)
 
+	def resolve_sum(self):
+		return self.first_number + self.second_number
 
+	def resolve_subtraction(self):
+		return self.first_number - self.second_number
 
+	def resolve_multiplication(self):
+		return self.first_number * self.second_number
 
+	def resolve_division(self):
+		try:
+			self.first_number / self.second_number
+		except ZeroDivisionError as error:
+			self.error = error
+		else:
+			return self.first_number / self.second_number
 
+	def conclude_operation(self, result):
 
+		self.total = result
+		self.text.set(f'{self.total}')
+		self.aggregator = [str(self.total)]
+		self.aggregator_status = 'Inactive'
+		self.new_entry = True
+		self.first_number_status = False
+		self.last_value = self.second_number
 
+		if isinstance(self.error, ZeroDivisionError):
+			self.text.set(self.error.args)
+			self.set_to_default()
 
+		self.debugger()
+
+	def set_to_default(self):
+		self.aggregator = []
+		self.operator = None
+		self.total = 0
+		self.error = None
+		self.first_number = 0
+		self.second_number = 0
+		self.first_number_status = False
+		self.new_entry = True
+		self.aggregator_status = 'Inactive'
+
+		self.debugger()
 
 
 
