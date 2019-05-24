@@ -199,19 +199,55 @@ class ButtonsContainer(tkinter.Frame):
 				tkinter.Button(
 					self,
 					text=i,
-					padx=pad,
-					pady=pad,
+					padx=pad, pady=pad,
 					).grid(row=3, column=1, sticky='nsew')
 			else:
 				tkinter.Button(
 					self,
 					text=i,
-					padx=pad,
-					pady=pad
+					padx=pad, pady=pad
 					).grid(row=row, column=column, sticky='nsew')
 				if column == 2:
 					column = 0
 					row += 1
 				else:
 					column += 1
+
+		for i in [
+			['+', 0, 3], ["-", 1, 3],
+			['*', 2, 3], ['/', 3, 3],
+			['.', 3, 0], ['=', 3, 2],
+			['CLEAR', 4, 0]]:
+			if i[0] == 'CLEAR':
+				tkinter.Button(
+					self,
+					text=i[0],
+					padx=pad, pady=pad,
+					command=self.clear
+					).grid(row=i[1], column=i[2], columnspan=4, sticky='nsew')
+			elif i[0] == '=':
+				tkinter.Button(
+					self,
+					text=i[0],
+					padx=pad,
+					pady=pad,
+					command=self.equal
+					).grid(row=i[1], column=i[2], sticky='nsew')
+			else:
+				tkinter.Button(
+					self,
+					text=i[0],
+					padx=pad, pady=pad,
+					command=self.foo
+					).grid(row=i[1], column=i[2], sticky='nsew')
+
+
+	def clear(self):
+		pass
+
+	def equal(self):
+		pass
+	def foo(self):
+		pass
+
 
