@@ -157,6 +157,13 @@ class Calculator(tkinter.Frame):
 
 		self.debugger()
 
+	def press_equal(self):
+		if self.first_number_status == False:
+			self.first_number = self.get_values_from_aggregator()
+			self.resolve_handler()		
+		else:
+			self.second_number = self.get_values_from_aggregator()
+			self.resolve_handler()
 
 
 class DisplayContainer(tkinter.Frame):
@@ -225,7 +232,7 @@ class ButtonsContainer(tkinter.Frame):
 					text=i[0],
 					padx=pad,
 					pady=pad,
-					command=self.equal
+					command=self.parent.press_equal
 					).grid(row=i[1], column=i[2], sticky='nsew')
 			else:
 				tkinter.Button(
@@ -235,9 +242,6 @@ class ButtonsContainer(tkinter.Frame):
 					command=self.foo
 					).grid(row=i[1], column=i[2], sticky='nsew')
 
-
-	def clear(self):
-		pass
 
 	def equal(self):
 		pass
