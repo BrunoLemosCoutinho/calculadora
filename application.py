@@ -157,7 +157,10 @@ class Calculator(tkinter.Frame):
 		self.debugger()
 
 
-	
+	def clear_all(self):
+		self.set_to_default()
+		self.text.set(0)
+
 
 
 
@@ -221,7 +224,7 @@ class ButtonsContainer(tkinter.Frame):
 					self,
 					text=i[0],
 					padx=pad, pady=pad,
-					command=self.parent.set_to_default
+					command=self.parent.clear_all
 					).grid(row=i[1], column=i[2], columnspan=4, sticky='nsew')
 			elif i[0] == '=':
 				tkinter.Button(
