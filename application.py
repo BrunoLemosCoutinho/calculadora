@@ -106,34 +106,29 @@ class Calculator(tkinter.Frame):
 
 	def resolve_handler(self):
 		if self.operator == '+':
-			result = self.resolve_sum()
+			result = self.first_number + self.second_number
 			self.conclude_operation(result)
+
 		elif self.operator == '-':
-			result = self.resolve_subtraction()
+			result = self.first_number - self.second_number
 			self.conclude_operation(result)
+
 		elif self.operator == '*':
-			result = self.resolve_multiplication()
+			result = self.first_number * self.second_number
 			self.conclude_operation(result)
+
 		elif self.operator == '/':
-			result = self.resolve_division()
-			self.conclude_operation(result)
+			try:
+				self.first_number / self.second_number
 
-	def resolve_sum(self):
-		return self.first_number + self.second_number
+			except ZeroDivisionError as error:
+				self.error = error
+			else:
+				result = self.resolve_division()
 
-	def resolve_subtraction(self):
-		return self.first_number - self.second_number
+			finally:
+				self.conclude_operation(result)
 
-	def resolve_multiplication(self):
-		return self.first_number * self.second_number
-
-	def resolve_division(self):
-		try:
-			self.first_number / self.second_number
-		except ZeroDivisionError as error:
-			self.error = error
-		else:
-			return self.first_number / self.second_number
 
 	def conclude_operation(self, result):
 
