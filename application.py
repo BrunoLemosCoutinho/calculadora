@@ -119,14 +119,11 @@ class Calculator(tkinter.Frame):
 
 		elif self.operator == '/':
 			try:
-				self.first_number / self.second_number
-
+				result = self.first_number / self.second_number
 			except ZeroDivisionError as error:
 				self.error = error
+				self.conclude_operation(0)
 			else:
-				result = self.resolve_division()
-
-			finally:
 				self.conclude_operation(result)
 
 
@@ -160,6 +157,11 @@ class Calculator(tkinter.Frame):
 		self.debugger()
 
 
+	
+
+
+
+
 
 class DisplayContainer(tkinter.Frame):
 	def __init__(self, parent):
@@ -177,6 +179,7 @@ class DisplayContainer(tkinter.Frame):
 class ButtonsContainer(tkinter.Frame):
 	def __init__(self, parent):
 		super().__init__(parent)
+		self.parent = parent
 
 		for x in range(0, 5):
 			self.rowconfigure(x, weight=1)
@@ -218,7 +221,7 @@ class ButtonsContainer(tkinter.Frame):
 					self,
 					text=i[0],
 					padx=pad, pady=pad,
-					command=self.clear
+					command=self.parent.set_to_default
 					).grid(row=i[1], column=i[2], columnspan=4, sticky='nsew')
 			elif i[0] == '=':
 				tkinter.Button(
