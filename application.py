@@ -138,12 +138,13 @@ class Calculator(tkinter.Frame):
 		self.last_value = self.second_number
 
 		if isinstance(self.error, ZeroDivisionError):
-			self.text.set(self.error.args)
 			self.set_to_default()
+			self.text.set("Zero Division Error")
 
 		self.debugger()
 
 	def set_to_default(self):
+		self.text.set(0)
 		self.aggregator = []
 		self.operator = None
 		self.total = 0
@@ -159,7 +160,6 @@ class Calculator(tkinter.Frame):
 
 	def clear_all(self):
 		self.set_to_default()
-		self.text.set(0)
 
 
 
