@@ -257,7 +257,7 @@ class ButtonsContainer(tkinter.Frame):
 		pad=15
 		row = 0
 		column = 0
-		for i in range(10):
+		for i in reversed(range(10)):
 			if i==0:
 				tkinter.Button(
 					self,
