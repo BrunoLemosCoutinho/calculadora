@@ -26,7 +26,7 @@ class Calculator(tkinter.Frame):
 		self.place_frames()
 		self.bind("<Key>", self.key_handler)
 		self.bind("<Return>", self.return_key_handler)
-		self.bind("<BackSpace>", self.backspace_key_handler)
+		self.bind("<BackSpace>", self.backspace_handler)
 		self.bind("<Escape>", self.esc_handler)
 		self.debugger()		# DEBUGGER
 
@@ -106,7 +106,7 @@ class Calculator(tkinter.Frame):
 	def return_key_handler(self, event):
 		self.resolve_handler()
 
-	def backspace_key_handler(self, event):
+	def backspace_handler(self, event):
 		pass
 		if self.aggregator:
 			del self.aggregator[-1]
