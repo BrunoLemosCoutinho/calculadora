@@ -25,6 +25,7 @@ class Calculator(tkinter.Frame):
 
 		self.place_frames()
 		self.bind("<Key>", self.key_handler)
+		#self.bind("<Return>")
 		self.debugger()		# DEBUGGER
 
 	def place_frames(self):
@@ -56,13 +57,7 @@ class Calculator(tkinter.Frame):
 			self.operators_handler(operator_char)
 
 		elif event.char == '=':
-			if self.first_number_status == False:
-				self.first_number = self.get_values_from_aggregator()
-				self.resolve_handler()
-
-			else:
-				self.second_number = self.get_values_from_aggregator()
-				self.resolve_handler()
+			self.resolve_handler()
 
 		elif event.char == ',' or event.char =='.':
 			if self.decimal_separator == False:
@@ -90,12 +85,7 @@ class Calculator(tkinter.Frame):
 			self.operators_handler(operator_char)
 
 		elif button == '=':
-			if self.first_number_status == False:
-				self.first_number = self.get_values_from_aggregator()
-				self.resolve_handler()
-			else:
-				self.second_number = self.get_values_from_aggregator()
-				self.resolve_handler()
+			self.resolve_handler()
 
 		elif button == '.':
 			if self.decimal_separator == False:
@@ -158,7 +148,13 @@ class Calculator(tkinter.Frame):
 			return float(values)
 		else:
 			return 0
+
 	def resolve_handler(self):
+		if self.first_number_status == False:
+			self.first_number = self.get_values_from_aggregator()
+		else:
+			self.second_number = self.get_values_from_aggregator()
+
 		if self.operator == '+':
 			result = self.first_number + self.second_number
 			self.conclude_operation(result)
@@ -215,13 +211,6 @@ class Calculator(tkinter.Frame):
 
 		self.debugger()
 
-	def press_equal(self):
-		if self.first_number_status == False:
-			self.first_number = self.get_values_from_aggregator()
-			self.resolve_handler()		
-		else:
-			self.second_number = self.get_values_from_aggregator()
-			self.resolve_handler()
 
 
 class DisplayContainer(tkinter.Frame):
@@ -292,7 +281,7 @@ class ButtonsContainer(tkinter.Frame):
 					text=i[0],
 					padx=pad,
 					pady=pad,
-					command=self.parent.press_equal
+					command=self.parent.resolve_handler
 					).grid(row=i[1], column=i[2], sticky='nsew')
 			else:
 				tkinter.Button(
