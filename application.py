@@ -98,6 +98,19 @@ class Calculator(tkinter.Frame):
 				self.second_number = self.get_values_from_aggregator()
 				self.resolve_handler()
 
+		elif button == '.':
+			if self.decimal_separator == False:
+
+				if self.new_entry:
+					zeropoint_char = '0.'
+					self.put_char_on_display(zeropoint_char)
+					self.decimal_separator = True
+					self.debugger()
+				else:
+					decimal_char = '.'
+					self.put_char_on_display(decimal_char)
+					self.decimal_separator = True
+					self.debugger()
 
 
 	def put_char_on_display(self, char):
