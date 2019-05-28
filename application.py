@@ -14,6 +14,7 @@ class Calculator(tkinter.Frame):
 		self.text.set(0)
 		self.aggregator = []
 		self.operator = None
+		self.decimal_separator = False
 		self.total = 0
 		self.error = None
 		self.first_number = 0
@@ -36,6 +37,7 @@ class Calculator(tkinter.Frame):
 		print(f'AGGREGATOR current content: {self.aggregator}')
 		print(f'AGGREGATOR current status: {self.aggregator_status}')
 		print(f'new_entry: {self.new_entry}')
+		print(f'decimal_separator: {self.decimal_separator}')
 		print(f'Current OPERATOR: {self.operator}')
 		print(f'first_number value: {self.first_number}')
 		print(f'second_number value: {self.second_number}')
@@ -43,7 +45,7 @@ class Calculator(tkinter.Frame):
 		print(f'TOTAL: {self.total}')
 		print('--------------------------------------------------')
 
-	def key_handler(self, event):  # this block could be elif instead ifs?
+	def key_handler(self, event):
 		if event.char.isdigit():
 			numerical_char = event.char
 			self.put_char_on_display(numerical_char)
@@ -62,6 +64,22 @@ class Calculator(tkinter.Frame):
 				self.second_number = self.get_values_from_aggregator()
 				self.resolve_handler()
 
+		elif event.char == ',' or event.char =='.':
+			if self.decimal_separator == False:
+
+				if self.new_entry:
+					zeropoint_char = '0.'
+					self.put_char_on_display(zeropoint_char)
+					self.decimal_separator = True
+					self.debugger()
+				else:
+					decimal_char = '.'
+					self.put_char_on_display(decimal_char)
+					self.decimal_separator = True
+					self.debugger()
+
+
+
 	def buttons_handler(self, button):
 		if button in range(10):
 			numerical_char = str(button)
@@ -79,7 +97,6 @@ class Calculator(tkinter.Frame):
 			else:
 				self.second_number = self.get_values_from_aggregator()
 				self.resolve_handler()
-
 
 
 
@@ -102,6 +119,7 @@ class Calculator(tkinter.Frame):
 			self.first_number_status = True
 			self.operator = char
 			self.new_entry = True
+			self.decimal_separator = False
 			self.aggregator_status = 'Inactive'
 
 			self.debugger()
@@ -156,8 +174,9 @@ class Calculator(tkinter.Frame):
 		self.aggregator = [str(self.total)]
 		self.aggregator_status = 'Inactive'
 		self.new_entry = True
+		self.decimal_separator = False
 		self.first_number_status = False
-		self.last_value = self.second_number
+		self.last_value = self.second_number  #remove or in use?
 
 		if isinstance(self.error, ZeroDivisionError):
 			self.set_to_default()
@@ -165,10 +184,13 @@ class Calculator(tkinter.Frame):
 
 		self.debugger()
 
+
+
 	def set_to_default(self):
 		self.text.set(0)
 		self.aggregator = []
 		self.operator = None
+		self.decimal_separator = False
 		self.total = 0
 		self.error = None
 		self.first_number = 0
