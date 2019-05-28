@@ -25,7 +25,7 @@ class Calculator(tkinter.Frame):
 
 		self.place_frames()
 		self.bind("<Key>", self.key_handler)
-		#self.bind("<Return>")
+		self.bind("<Return>", self.return_key_handler)
 		self.debugger()		# DEBUGGER
 
 	def place_frames(self):
@@ -101,6 +101,8 @@ class Calculator(tkinter.Frame):
 					self.decimal_separator = True
 					self.debugger()
 
+	def return_key_handler(self, event):
+		self.resolve_handler()
 
 	def put_char_on_display(self, char):
 		if self.new_entry == True:
