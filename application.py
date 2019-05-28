@@ -43,15 +43,15 @@ class Calculator(tkinter.Frame):
 		print(f'TOTAL: {self.total}')
 		print('--------------------------------------------------')
 
-	def key_handler(self, event):
+	def key_handler(self, event):  # this block could be elif instead ifs?
 		if event.char.isdigit():
-			char = event.char
-			self.put_char_on_display(char)
+			numerical_char = event.char
+			self.put_char_on_display(numerical_char)
 			self.debugger()
 
 		if event.char in self.operators:
-			char = event.char
-			self.operators_handler(char)
+			operator_char = event.char
+			self.operators_handler(operator_char)
 
 		if event.char == '=':
 			if self.first_number_status == False:
@@ -62,13 +62,24 @@ class Calculator(tkinter.Frame):
 				self.second_number = self.get_values_from_aggregator()
 				self.resolve_handler()
 
-	def buttons_handler(self, n):
-		'''if n in range(10):
-			if self.new_entry == True:
-				self.aggregator = []
-				self.aggregator.append(n)
-				self.'''
-		print(n)
+	def buttons_handler(self, button):
+		if button in range(10):
+			numerical_char = str(button)
+			self.put_char_on_display(numerical_char)
+			self.debugger()
+
+		elif button in self.operators:
+			operator_char = str(button)
+			self.operators_handler(operator_char)
+
+		elif button == '=':
+			if self.first_number_status == False:
+				self.first_number = self.get_values_from_aggregator()
+				self.resolve_handler()
+			else:
+				self.second_number = self.get_values_from_aggregator()
+				self.resolve_handler()
+
 
 
 
