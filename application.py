@@ -107,7 +107,6 @@ class Calculator(tkinter.Frame):
 		self.resolve_handler()
 
 	def backspace_handler(self, event):
-		pass
 		if self.aggregator:
 			del self.aggregator[-1]
 			self.text.set(self.aggregator)
