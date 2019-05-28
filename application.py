@@ -49,11 +49,11 @@ class Calculator(tkinter.Frame):
 			self.put_char_on_display(numerical_char)
 			self.debugger()
 
-		if event.char in self.operators:
+		elif event.char in self.operators:
 			operator_char = event.char
 			self.operators_handler(operator_char)
 
-		if event.char == '=':
+		elif event.char == '=':
 			if self.first_number_status == False:
 				self.first_number = self.get_values_from_aggregator()
 				self.resolve_handler()
