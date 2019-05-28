@@ -79,7 +79,6 @@ class Calculator(tkinter.Frame):
 					self.debugger()
 
 
-
 	def buttons_handler(self, button):
 		if button in range(10):
 			numerical_char = str(button)
@@ -155,8 +154,10 @@ class Calculator(tkinter.Frame):
 
 	def get_values_from_aggregator(self):
 		values = ''.join(self.aggregator)
-		return float(values)
-
+		if values:
+			return float(values)
+		else:
+			return 0
 	def resolve_handler(self):
 		if self.operator == '+':
 			result = self.first_number + self.second_number
