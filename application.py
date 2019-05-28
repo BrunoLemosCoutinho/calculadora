@@ -45,11 +45,13 @@ class Calculator(tkinter.Frame):
 
 	def key_handler(self, event):
 		if event.char.isdigit():
-			self.put_char_on_display(event)
+			char = event.char
+			self.put_char_on_display(char)
 			self.debugger()
 
 		if event.char in self.operators:
-			self.operators_handler(event)
+			char = event.char
+			self.operators_handler(char)
 
 		if event.char == '=':
 			if self.first_number_status == False:
@@ -60,24 +62,34 @@ class Calculator(tkinter.Frame):
 				self.second_number = self.get_values_from_aggregator()
 				self.resolve_handler()
 
-	def put_char_on_display(self, event):
+	def buttons_handler(self, n):
+		'''if n in range(10):
+			if self.new_entry == True:
+				self.aggregator = []
+				self.aggregator.append(n)
+				self.'''
+		print(n)
+
+
+
+	def put_char_on_display(self, char):
 		if self.new_entry == True:
 			self.aggregator = []
-			self.aggregator.append(event.char)
+			self.aggregator.append(char)
 			self.text.set(self.aggregator)
 			self.aggregator_status = 'Active'
 			self.new_entry = False
 		else:
-			self.aggregator.append(event.char)
+			self.aggregator.append(char)
 			self.text.set(self.aggregator)
 			self.aggregator_status = 'Active'
 
-	def operators_handler(self, event):
+	def operators_handler(self, char):
 		# Assingn the first_number
 		if self.first_number_status == False:
 			self.first_number = self.get_values_from_aggregator()
 			self.first_number_status = True
-			self.operator = event.char
+			self.operator = char
 			self.new_entry = True
 			self.aggregator_status = 'Inactive'
 
@@ -86,14 +98,13 @@ class Calculator(tkinter.Frame):
 			# Handles user changing the operators
 			if (self.first_number_status == True and
 					self.aggregator_status == 'Inactive'):
-					if event.char != self.operator:
-						self.operator = event.char
+					if char != self.operator:
+						self.operator = char
 
 						self.debugger()
 			else:
 				self.second_number = self.get_values_from_aggregator()
-				#self.second_number_status = True
-				self.operator = event.char
+				self.operator = char
 				self.aggregator_status = 'Inactive'
 				self.resolve_handler()
 		# If user press any operator after typing the second value
@@ -201,12 +212,14 @@ class ButtonsContainer(tkinter.Frame):
 					self,
 					text=i,
 					padx=pad, pady=pad,
+					command=lambda n=i: self.parent.buttons_handler(n)
 					).grid(row=3, column=1, sticky='nsew')
 			else:
 				tkinter.Button(
 					self,
 					text=i,
-					padx=pad, pady=pad
+					padx=pad, pady=pad,
+					command=lambda n=i: self.parent.buttons_handler(n)
 					).grid(row=row, column=column, sticky='nsew')
 				if column == 2:
 					column = 0
@@ -239,12 +252,11 @@ class ButtonsContainer(tkinter.Frame):
 					self,
 					text=i[0],
 					padx=pad, pady=pad,
-					command=self.foo
+					command=lambda n=i[0]: self.parent.buttons_handler(n)
 					).grid(row=i[1], column=i[2], sticky='nsew')
 
 
-	def equal(self):
-		pass
+
 	def foo(self):
 		pass
 
