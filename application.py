@@ -4,11 +4,12 @@ import tkinter
 class Calculator(tkinter.Frame):
 	def __init__(self, parent):
 		super().__init__(parent)
-		self.rowconfigure(0, weight=1)
-		self.rowconfigure(1, weight=1)
+		self.rowconfigure(0, weight=1)    # Row for display
+		self.rowconfigure(1, weight=1)    # Row for buttons frame
 		self.columnconfigure(0, weight=1)
 		self.focus_set()
 
+		# Variables for calculations and process control
 		self.display_chars = tkinter.StringVar()
 		self.display_chars.set(0)
 		self.aggregator = []
@@ -27,7 +28,7 @@ class Calculator(tkinter.Frame):
 		self.bind("<Return>", self.return_key_handler)
 		self.bind("<BackSpace>", self.backspace_handler)
 		self.bind("<Escape>", self.esc_handler)
-		self.debugger()		# DEBUGGER
+		self.debugger()
 
 
 	def place_frames(self):
@@ -51,6 +52,21 @@ class Calculator(tkinter.Frame):
 
 
 	def key_handler(self, event):
+		'''Handles inputs comming from the keyboard.
+
+		   This function only accepts four types of keyboard inputs:
+		   (1) Numbers
+		   (2) Basic math operators: +, -, *, /
+		   (3) '=' key
+		   (4) ',' or '.' for decimal separator
+		   Obs: Other keys are ignored
+
+		   Cases (1) and (4) make the respective value to be shown at
+		   the calculator display.
+		   Case (2) calls the operator handling, that either stores a
+		   value or executes an operation.
+		   Case (3) calls the resolving function.
+		'''
 		if event.char.isdigit():
 			numerical_char = event.char
 			self.put_char_on_display(numerical_char)
@@ -64,6 +80,13 @@ class Calculator(tkinter.Frame):
 			self.resolve_handler()
 
 		elif event.char == ',' or event.char =='.':
+			# There can be only one decimal separator at time.
+			#
+			# Also, self.new_entry checks if it´s the initial entry
+			# at first or second number. If so, considers its
+			# beggining as been a decimal of 0. That´s the case
+			# when user presses comma/dot at the beggining of the entry.
+
 			if self.decimal_separator == False:
 
 				if self.new_entry:
@@ -79,6 +102,15 @@ class Calculator(tkinter.Frame):
 
 
 	def buttons_handler(self, button):
+		'''Handles inputs comming from the calculator´s buttons.
+		   As function key_handler does, it handles the following
+		   inputs:
+		   (1) Numbers, that are displayed or stored.
+		   (2) Basic math operators, that stores a value and operator.
+		   or process an operation, according to context.
+		   (3) Resolves an operation with the values and operator stored.
+		   (4) Sets an decimal separator
+		'''
 		if button in range(10):
 			numerical_char = str(button)
 			self.put_char_on_display(numerical_char)
@@ -92,6 +124,12 @@ class Calculator(tkinter.Frame):
 			self.resolve_handler()
 
 		elif button == '.':
+			# There can be only one decimal separator at time.
+			#
+			# Also, self.new_entry checks if it´s the initial entry
+			# at first or second number. If so, considers its
+			# beggining as been a decimal of 0. That´s the case
+			# when user presses comma/dot at the beggining of the entry.
 			if self.decimal_separator == False:
 
 				if self.new_entry:
@@ -242,7 +280,7 @@ class DisplayContainer(tkinter.Frame):
 			background='lightgrey',
 			relief='ridge',
 			border=5,
-			textvariable=self.parent.text,
+			textvariable=self.parent.display_chars,
 			).pack(fill='both', expand=1)
 
 
