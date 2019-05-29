@@ -2,7 +2,6 @@ import tkinter
 
 
 class Calculator(tkinter.Frame):
-	operators = ['+', '-', '*', '/']
 	def __init__(self, parent):
 		super().__init__(parent)
 		self.rowconfigure(0, weight=1)
@@ -10,8 +9,8 @@ class Calculator(tkinter.Frame):
 		self.columnconfigure(0, weight=1)
 		self.focus_set()
 
-		self.text = tkinter.StringVar()
-		self.text.set(0)
+		self.display_chars = tkinter.StringVar()
+		self.display_chars.set(0)
 		self.aggregator = []
 		self.operator = None
 		self.decimal_separator = False
@@ -30,11 +29,13 @@ class Calculator(tkinter.Frame):
 		self.bind("<Escape>", self.esc_handler)
 		self.debugger()		# DEBUGGER
 
+
 	def place_frames(self):
 		display_frame = DisplayContainer(self
 			).grid(row=0, column=0, sticky='nsew')
 		buttons_frame = ButtonsContainer(self
 			).grid(row=1, column=0, sticky='nsew')
+
 
 	def debugger(self):
 		print(f'AGGREGATOR current content: {self.aggregator}')
@@ -48,13 +49,14 @@ class Calculator(tkinter.Frame):
 		print(f'TOTAL: {self.total}')
 		print('--------------------------------------------------')
 
+
 	def key_handler(self, event):
 		if event.char.isdigit():
 			numerical_char = event.char
 			self.put_char_on_display(numerical_char)
 			self.debugger()
 
-		elif event.char in self.operators:
+		elif event.char in ('+', '-', '*', '/'):
 			operator_char = event.char
 			self.operators_handler(operator_char)
 
@@ -82,7 +84,7 @@ class Calculator(tkinter.Frame):
 			self.put_char_on_display(numerical_char)
 			self.debugger()
 
-		elif button in self.operators:
+		elif button in ('+', '-', '*', '/'):
 			operator_char = str(button)
 			self.operators_handler(operator_char)
 
@@ -103,14 +105,17 @@ class Calculator(tkinter.Frame):
 					self.decimal_separator = True
 					self.debugger()
 
+
 	def return_key_handler(self, event):
 		self.resolve_handler()
+
 
 	def backspace_handler(self, event):
 		if self.aggregator:
 			del self.aggregator[-1]
-			self.text.set(self.aggregator)
+			self.display_chars.set(self.aggregator)
 			self.debugger()
+
 
 	def esc_handler(self, event):
 		self.set_to_default()
@@ -120,12 +125,12 @@ class Calculator(tkinter.Frame):
 		if self.new_entry == True:
 			self.aggregator = []
 			self.aggregator.append(char)
-			self.text.set(self.aggregator)
+			self.display_chars.set(self.aggregator)
 			self.aggregator_status = 'Active'
 			self.new_entry = False
 		else:
 			self.aggregator.append(char)
-			self.text.set(self.aggregator)
+			self.display_chars.set(self.aggregator)
 			self.aggregator_status = 'Active'
 
 	def operators_handler(self, char):
@@ -156,12 +161,14 @@ class Calculator(tkinter.Frame):
 		# the value on display will be assingned in second_number
 		# variable and resolve_handler() will be called.
 
+
 	def get_values_from_aggregator(self):
 		values = ''.join(self.aggregator)
 		if values:
 			return float(values)
 		else:
 			return 0
+
 
 	def resolve_handler(self):
 		if self.first_number_status == False:
@@ -194,24 +201,22 @@ class Calculator(tkinter.Frame):
 	def conclude_operation(self, result):
 
 		self.total = result
-		self.text.set(f'{self.total}')
+		self.display_chars.set(f'{self.total}')
 		self.aggregator = [str(self.total)]
 		self.aggregator_status = 'Inactive'
 		self.new_entry = True
 		self.decimal_separator = False
 		self.first_number_status = False
-		self.last_value = self.second_number  #remove or in use?
 
 		if isinstance(self.error, ZeroDivisionError):
 			self.set_to_default()
-			self.text.set("Zero Division Error")
+			self.display_chars.set("Zero Division Error")
 
 		self.debugger()
 
 
-
 	def set_to_default(self):
-		self.text.set(0)
+		self.display_chars.set(0)
 		self.aggregator = []
 		self.operator = None
 		self.decimal_separator = False
@@ -240,6 +245,7 @@ class DisplayContainer(tkinter.Frame):
 			textvariable=self.parent.text,
 			).pack(fill='both', expand=1)
 
+
 class ButtonsContainer(tkinter.Frame):
 	def __init__(self, parent):
 		super().__init__(parent)
@@ -252,23 +258,27 @@ class ButtonsContainer(tkinter.Frame):
 
 		self.create_buttons()
 
+
 	def create_buttons(self):
 		pad=15
 		row = 0
 		column = 0
+
 		for i in reversed(range(10)):
 			if i==0:
 				tkinter.Button(
 					self,
 					text=i,
-					padx=pad, pady=pad,
+					padx=pad,
+					pady=pad,
 					command=lambda n=i: self.parent.buttons_handler(n)
 					).grid(row=3, column=1, sticky='nsew')
 			else:
 				tkinter.Button(
 					self,
 					text=i,
-					padx=pad, pady=pad,
+					padx=pad,
+					pady=pad,
 					command=lambda n=i: self.parent.buttons_handler(n)
 					).grid(row=row, column=column, sticky='nsew')
 				if column == 2:
@@ -286,7 +296,8 @@ class ButtonsContainer(tkinter.Frame):
 				tkinter.Button(
 					self,
 					text=i[0],
-					padx=pad, pady=pad,
+					padx=pad,
+					pady=pad,
 					command=self.parent.set_to_default
 					).grid(row=i[1], column=i[2], columnspan=4, sticky='nsew')
 			elif i[0] == '=':
@@ -301,13 +312,9 @@ class ButtonsContainer(tkinter.Frame):
 				tkinter.Button(
 					self,
 					text=i[0],
-					padx=pad, pady=pad,
+					padx=pad,
+					pady=pad,
 					command=lambda n=i[0]: self.parent.buttons_handler(n)
 					).grid(row=i[1], column=i[2], sticky='nsew')
-
-
-
-	def foo(self):
-		pass
 
 
