@@ -17,9 +17,9 @@ class Calculator(tkinter.Frame):
 		self.decimal_separator = False
 		self.total = 0
 		self.error = None
-		self.first_number = 0
-		self.second_number = 0
-		self.first_number_status = False
+		self.first_operator = 0
+		self.second_operator = 0
+		self.first_operator_status = False
 		self.new_entry = True
 		self.aggregator_status = 'Inactive'
 
@@ -44,9 +44,9 @@ class Calculator(tkinter.Frame):
 		print(f'new_entry: {self.new_entry}')
 		print(f'decimal_separator: {self.decimal_separator}')
 		print(f'Current OPERATOR: {self.operator}')
-		print(f'first_number value: {self.first_number}')
-		print(f'second_number value: {self.second_number}')
-		print(f'first_number_status: {self.first_number_status}')
+		print(f'first_operator value: {self.first_operator}')
+		print(f'second_operator value: {self.second_operator}')
+		print(f'first_operator_status: {self.first_operator_status}')
 		print(f'TOTAL: {self.total}')
 		print('--------------------------------------------------')
 
@@ -77,7 +77,7 @@ class Calculator(tkinter.Frame):
 			self.operators_handler(operator_char)
 
 		elif event.char == '=':
-			self.resolve_handler()
+			self.resolve_operation()
 
 		elif event.char == ',' or event.char =='.':
 			# There can be only one decimal separator at time.
@@ -121,7 +121,7 @@ class Calculator(tkinter.Frame):
 			self.operators_handler(operator_char)
 
 		elif button == '=':
-			self.resolve_handler()
+			self.resolve_operation()
 
 		elif button == '.':
 			# There can be only one decimal separator at time.
@@ -147,7 +147,7 @@ class Calculator(tkinter.Frame):
 
 
 	def return_key_handler(self, event):
-		self.resolve_handler()
+		self.resolve_operation()
 
 
 	def backspace_handler(self, event):
@@ -196,9 +196,9 @@ class Calculator(tkinter.Frame):
 
 		'''
 		# Assingn the first operand
-		if self.first_number_status == False:
-			self.first_number = self.get_values_from_aggregator()
-			self.first_number_status = True
+		if self.first_operator_status == False:
+			self.first_operator = self.get_values_from_aggregator()
+			self.first_operator_status = True
 			self.operator = char
 			self.new_entry = True
 			self.decimal_separator = False
@@ -207,7 +207,7 @@ class Calculator(tkinter.Frame):
 			self.debugger()
 		else:
 			# Handles user changing the operators
-			if (self.first_number_status == True and
+			if (self.first_operator_status == True and
 					self.aggregator_status == 'Inactive'):
 					if char != self.operator:
 						self.operator = char
@@ -215,12 +215,12 @@ class Calculator(tkinter.Frame):
 						self.debugger()
 			else:
 				# If user press any operator after typing the second value
-				# the value on display will be assingned in second_number
-				# variable and resolve_handler() will be called.
-				self.second_number = self.get_values_from_aggregator()
+				# the value on display will be assingned in second_operator
+				# variable and resolve_operation() will be called.
+				self.second_operator = self.get_values_from_aggregator()
 				self.operator = char
 				self.aggregator_status = 'Inactive'
-				self.resolve_handler()
+				self.resolve_operation()
 
 
 	def get_values_from_aggregator(self):
@@ -236,27 +236,27 @@ class Calculator(tkinter.Frame):
 			return 0
 
 
-	def resolve_handler(self):
-		if self.first_number_status == False:
-			self.first_number = self.get_values_from_aggregator()
+	def resolve_operation(self):
+		if self.first_operator_status == False:
+			self.first_operator = self.get_values_from_aggregator()
 		else:
-			self.second_number = self.get_values_from_aggregator()
+			self.second_operator = self.get_values_from_aggregator()
 
 		if self.operator == '+':
-			result = self.first_number + self.second_number
+			result = self.first_operator + self.second_operator
 			self.conclude_operation(result)
 
 		elif self.operator == '-':
-			result = self.first_number - self.second_number
+			result = self.first_operator - self.second_operator
 			self.conclude_operation(result)
 
 		elif self.operator == '*':
-			result = self.first_number * self.second_number
+			result = self.first_operator * self.second_operator
 			self.conclude_operation(result)
 
 		elif self.operator == '/':
 			try:
-				result = self.first_number / self.second_number
+				result = self.first_operator / self.second_operator
 			except ZeroDivisionError as error:
 				self.error = error
 				self.conclude_operation(0)
@@ -272,7 +272,7 @@ class Calculator(tkinter.Frame):
 		self.aggregator_status = 'Inactive'
 		self.new_entry = True
 		self.decimal_separator = False
-		self.first_number_status = False
+		self.first_operator_status = False
 
 		if isinstance(self.error, ZeroDivisionError):
 			self.set_to_default()
@@ -288,9 +288,9 @@ class Calculator(tkinter.Frame):
 		self.decimal_separator = False
 		self.total = 0
 		self.error = None
-		self.first_number = 0
-		self.second_number = 0
-		self.first_number_status = False
+		self.first_operator = 0
+		self.second_operator = 0
+		self.first_operator_status = False
 		self.new_entry = True
 		self.aggregator_status = 'Inactive'
 
@@ -372,7 +372,7 @@ class ButtonsContainer(tkinter.Frame):
 					text=i[0],
 					padx=pad,
 					pady=pad,
-					command=self.parent.resolve_handler
+					command=self.parent.resolve_operation
 					).grid(row=i[1], column=i[2], sticky='nsew')
 			else:
 				tkinter.Button(
