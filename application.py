@@ -109,7 +109,7 @@ class Calculator(tkinter.Frame):
 		   (2) Basic math operators, that stores a value and operator.
 		   or process an operation, according to context.
 		   (3) Resolves an operation with the values and operator stored.
-		   (4) Sets an decimal separator
+		   (4) Sets an decimal separator 
 		'''
 		if button in range(10):
 			numerical_char = str(button)
@@ -127,9 +127,11 @@ class Calculator(tkinter.Frame):
 			# There can be only one decimal separator at time.
 			#
 			# Also, self.new_entry checks if it´s the initial entry
-			# at first or second number. If so, considers its
-			# beggining as been a decimal of 0. That´s the case
-			# when user presses comma/dot at the beggining of the entry.
+			# at first or second number. If so, clicking or typing the
+			# comma or dot makes the program consider the beggining as
+			# been a decimal of zero.
+			# That´s the case when user presses comma/dot at the
+			# beggining of the entry.
 			if self.decimal_separator == False:
 
 				if self.new_entry:
@@ -160,6 +162,15 @@ class Calculator(tkinter.Frame):
 
 
 	def put_char_on_display(self, char):
+		'''Makes an numeric input from keyboard or button be displayed.
+
+		This function handles two situations:
+		- Checks if it is the beggining of the input, through the self.new_entry variable. If true, clears the inputs aggregator and displays the new value passed, allowing posterior values to be added.
+		- If chars input is process is already in course, keep adding the values passed through the params into the inputs aggregator.
+
+		The aggregator variable self.aggregator progressivly gets numbers or a decimal separator to form a value that will be stored when an operator or the equal sign is activated.
+
+		'''
 		if self.new_entry == True:
 			self.aggregator = []
 			self.aggregator.append(char)
@@ -171,8 +182,20 @@ class Calculator(tkinter.Frame):
 			self.display_chars.set(self.aggregator)
 			self.aggregator_status = 'Active'
 
+
 	def operators_handler(self, char):
-		# Assingn the first_number
+		'''Gets an operator char and handles as context.
+
+		Set an operator via button click or keyboard envolves three situations:
+
+		(1) If no value is stored yet, and inputs are already in course.
+		This case, makes the value in aggregator be stored as the first operand.
+		(2) First operand is already stored, no new values are been inserted. The program then changes the operator, if it´s different.
+		(3) If first operand is already stored, a new input is in course.
+		The program stores the value as the second operand and executes the operation according to the operator set.
+
+		'''
+		# Assingn the first operand
 		if self.first_number_status == False:
 			self.first_number = self.get_values_from_aggregator()
 			self.first_number_status = True
@@ -191,16 +214,21 @@ class Calculator(tkinter.Frame):
 
 						self.debugger()
 			else:
+				# If user press any operator after typing the second value
+				# the value on display will be assingned in second_number
+				# variable and resolve_handler() will be called.
 				self.second_number = self.get_values_from_aggregator()
 				self.operator = char
 				self.aggregator_status = 'Inactive'
 				self.resolve_handler()
-		# If user press any operator after typing the second value
-		# the value on display will be assingned in second_number
-		# variable and resolve_handler() will be called.
 
 
 	def get_values_from_aggregator(self):
+		'''Converts the content of aggregator in a float number and
+		returns it.
+
+		If nothing is inserted into aggregator (and it´s empty), then it means that the	value is zero.
+		'''
 		values = ''.join(self.aggregator)
 		if values:
 			return float(values)
