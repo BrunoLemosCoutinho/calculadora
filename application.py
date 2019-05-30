@@ -254,6 +254,9 @@ class Calculator(tkinter.Frame):
             except ZeroDivisionError as error:
                 self.error = error
                 self.finish(0)
+            except:
+                self.error = error
+                self.finish(0)
             else:
                 self.finish(result)
 
@@ -267,9 +270,14 @@ class Calculator(tkinter.Frame):
         self.decimal_separator = False
         self.first_operator_status = False
 
-        if isinstance(self.error, ZeroDivisionError):
-            self.set_to_default()
-            self.display_chars.set("Zero Division Error")
+        if self.error:
+            if isinstance(self.error, ZeroDivisionError):
+                self.set_to_default()
+                self.display_chars.set('ZeroDivisionError')
+            else:
+                set_to_default()
+                self.display_chars.set('Unknown Error')
+
         self.debugger()
 
     def set_to_default(self):
