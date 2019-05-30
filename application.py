@@ -28,7 +28,7 @@ class Calculator(tkinter.Frame):
         self.bind("<Return>", self.return_key_handler)
         self.bind("<BackSpace>", self.backspace_handler)
         self.bind("<Escape>", self.esc_handler)
-        self.debugger()
+        ##self.debugger()
 
     def place_frames(self):
         display_frame = DisplayContainer(self
@@ -67,7 +67,7 @@ class Calculator(tkinter.Frame):
         if event.char.isdigit():
             numerical_char = event.char
             self.put_char_on_display(numerical_char)
-            self.debugger()
+            #self.debugger()
 
         elif event.char in ('+', '-', '*', '/'):
             operator_char = event.char
@@ -90,12 +90,12 @@ class Calculator(tkinter.Frame):
                     zeropoint_char = '0.'
                     self.put_char_on_display(zeropoint_char)
                     self.decimal_separator = True
-                    self.debugger()
+                    #self.debugger()
                 else:
                     decimal_char = '.'
                     self.put_char_on_display(decimal_char)
                     self.decimal_separator = True
-                    self.debugger()
+                    #self.debugger()
 
     def buttons_handler(self, button):
         '''Handles inputs comming from the calculator´s buttons.
@@ -110,7 +110,7 @@ class Calculator(tkinter.Frame):
         if button in range(10):
             numerical_char = str(button)
             self.put_char_on_display(numerical_char)
-            self.debugger()
+            #self.debugger()
 
         elif button in ('+', '-', '*', '/'):
             operator_char = str(button)
@@ -134,12 +134,12 @@ class Calculator(tkinter.Frame):
                     zeropoint_char = '0.'
                     self.put_char_on_display(zeropoint_char)
                     self.decimal_separator = True
-                    self.debugger()
+                    #self.debugger()
                 else:
                     decimal_char = '.'
                     self.put_char_on_display(decimal_char)
                     self.decimal_separator = True
-                    self.debugger()
+                    #self.debugger()
 
     def return_key_handler(self, event):
         self.resolve_operation()
@@ -148,7 +148,7 @@ class Calculator(tkinter.Frame):
         if self.aggregator:
             del self.aggregator[-1]
             self.display_chars.set(self.aggregator)
-            self.debugger()
+            #self.debugger()
 
     def esc_handler(self, event):
         self.set_to_default()
@@ -195,7 +195,7 @@ class Calculator(tkinter.Frame):
             self.decimal_separator = False
             self.aggregator_status = 'Inactive'
 
-            self.debugger()
+            #self.debugger()
         else:
             # Handles user changing the operators
             if (self.first_operator_status == True and
@@ -203,7 +203,7 @@ class Calculator(tkinter.Frame):
                 if char != self.operator:
                     self.operator = char
 
-                    self.debugger()
+                    #self.debugger()
             else:
                 # If user press any operator after typing the second value
                 # the value on display will be assingned in second_operator
@@ -278,7 +278,7 @@ class Calculator(tkinter.Frame):
                 set_to_default()
                 self.display_chars.set('Unknown Error')
 
-        self.debugger()
+        #self.debugger()
 
     def set_to_default(self):
         '''Sets program to its default parameters..
@@ -296,8 +296,7 @@ class Calculator(tkinter.Frame):
         self.first_operator_status = False
         self.new_entry = True
         self.aggregator_status = 'Inactive'
-
-        self.debugger()
+        #self.debugger()
 
 
 class DisplayContainer(tkinter.Frame):
