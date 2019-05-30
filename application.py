@@ -237,6 +237,8 @@ class Calculator(tkinter.Frame):
 
 
 	def resolve_operation(self):
+		'''Stores value as first or second operator, executes the corresponding operation and call the finish method with its result as parameter.
+		'''
 		if self.first_operator_status == False:
 			self.first_operator = self.get_values_from_aggregator()
 		else:
@@ -265,7 +267,7 @@ class Calculator(tkinter.Frame):
 
 
 	def finish(self, result):
-
+		# Displays the result and sets variables for new operations.
 		self.total = result
 		self.display_chars.set(f'{self.total}')
 		self.aggregator = [str(self.total)]
@@ -282,6 +284,8 @@ class Calculator(tkinter.Frame):
 
 
 	def set_to_default(self):
+		'''Sets program to its default parameters after an error is found or CLEAR be activated.
+		'''
 		self.display_chars.set(0)
 		self.aggregator = []
 		self.operator = None
@@ -330,7 +334,7 @@ class ButtonsContainer(tkinter.Frame):
 		row = 0
 		column = 0
 
-		for i in reversed(range(10)):
+		for i in range(10):
 			if i==0:
 				tkinter.Button(
 					self,
@@ -357,7 +361,8 @@ class ButtonsContainer(tkinter.Frame):
 			['+', 0, 3], ["-", 1, 3],
 			['*', 2, 3], ['/', 3, 3],
 			['.', 3, 0], ['=', 3, 2],
-			['CLEAR', 4, 0]]:
+			['CLEAR', 4, 0]
+			]:
 			if i[0] == 'CLEAR':
 				tkinter.Button(
 					self,
