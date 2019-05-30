@@ -244,27 +244,27 @@ class Calculator(tkinter.Frame):
 
 		if self.operator == '+':
 			result = self.first_operator + self.second_operator
-			self.conclude_operation(result)
+			self.finish(result)
 
 		elif self.operator == '-':
 			result = self.first_operator - self.second_operator
-			self.conclude_operation(result)
+			self.finish(result)
 
 		elif self.operator == '*':
 			result = self.first_operator * self.second_operator
-			self.conclude_operation(result)
+			self.finish(result)
 
 		elif self.operator == '/':
 			try:
 				result = self.first_operator / self.second_operator
 			except ZeroDivisionError as error:
 				self.error = error
-				self.conclude_operation(0)
+				self.finish(0)
 			else:
-				self.conclude_operation(result)
+				self.finish(result)
 
 
-	def conclude_operation(self, result):
+	def finish(self, result):
 
 		self.total = result
 		self.display_chars.set(f'{self.total}')
