@@ -42,7 +42,7 @@ Esboço geral de implementação
 **Diário de Bordo**
 ---
 
-**Dia 1 - 07/02/2018**
+**Dia 1 - 07/02/2019**
 
 *O que foi feito:*
 *  Criação do arquivo Readme.
@@ -55,7 +55,7 @@ Esboço geral de implementação
 *  Dificuldade na escolha da melhor opção (grid , pack ou place) para os frames dentro da janela Tk() e widgets dentro de cada frame.
 
 
-**Dia 2 - 11/02/2018**
+**Dia 2 - 11/02/2019**
 
 *O que foi feito:*
 *   Decisão do uso do gerenciador de geometria.
@@ -66,7 +66,7 @@ Esboço geral de implementação
 *  Dificuldade em como utilizar os comandos e como não quebrar o layout.
 
 
-**Dia 3 - 20/02/2018**
+**Dia 3 - 20/02/2019**
 
 *O que foi feito:*
 *  Estudos sobre o gerenciador de geometria grid.
@@ -79,7 +79,7 @@ Esboço geral de implementação
 *  Organizar a estrutura de nomes de classes e arquivos.
 
 
-**Dia 4 - 21/02/2018**
+**Dia 4 - 21/02/2019**
 
 *O que foi feito:*
 * Implementação da lógica dos cálculos
@@ -89,10 +89,22 @@ Esboço geral de implementação
 * Conflitos no código causados pelo uso de importação de módulos
 
 
-**Dia 5 - 06/03/2018**
+**Dia 5 - 06/03/2019**
 
 *O que foi feito:*
 * Implementação da funcionalidade que aceita inputs do teclado
 
 *Dificuldades:*
 * 
+
+**Maio/2019**
+
+*O que foi feito:*
+O código foi publicado no site https://codereview.stackexchange.com para avaliação sugestão de melhorias. Seguindo o feedback dos revisores (presente nas respostas ao tópico em https://codereview.stackexchange.com/questions/219124/calculator-in-python-3-using-tkinter), o código foi completamente refatorado. As principais mudanças implementadas foram:
+* Remover o uso do eval para processar os cálculos por trazer vulnerabilidades à aplicação e ser uma solução simplista demais.
+* Reduzir a quantidade de módulos. O excesso deles gerava problemas de importação circular.
+* Reduzir repetição de código.
+
+*Dificuldades:*
+* Implementar o código mais limpo para o layout dos botões
+
