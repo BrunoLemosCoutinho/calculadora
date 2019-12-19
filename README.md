@@ -27,13 +27,13 @@ Obs: para o cálculo da divisão, será mostrada mensagem de erro caso ocorra um
 Obs2: uma limitação inicial será a falta de tratamento de números com notação científica.
 
 
-**Esboço**
+**Tela da aplicação**
 ---
 
-Esboço geral de implementação
+Tela principal da aplicação
 
 
-![Tela](tela_principal.jpg)
+![Tela](tela_principal.JPG)
 
 
 
