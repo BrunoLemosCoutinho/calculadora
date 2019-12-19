@@ -33,7 +33,7 @@ Obs2: uma limitação inicial será a falta de tratamento de números com notaç
 Esboço geral de implementação
 
 
-![Esboço](Esboco.png)
+![Tela](tela_principal.jpg)
 
 
 
